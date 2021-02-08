@@ -17,14 +17,14 @@ void loop()
 {
   BUTTONstate1 = digitalRead(BUTTON1);
   BUTTONstate2 = digitalRead(BUTTON2);
-  if (BUTTONstate1 == HIGH||BUTTONstate2 == HIGH)
+  if (BUTTONstate1 == LOW||BUTTONstate2 == LOW)
   {
-    digitalWrite(LED, HIGH);
+    digitalWrite(LED, LOW);
   }
   else if (BUTTONstate1 == HIGH && BUTTONstate2 == HIGH) {
     digitalWrite(LED, LOW);
   }
   else {
-    digitalWrite(LED,LOW);
+    digitalWrite(LED,HIGH);
   }
 }
