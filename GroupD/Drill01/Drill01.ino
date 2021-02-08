@@ -1,11 +1,16 @@
-void setup() 
+void setup()
 {
-  // put your setup code here, to run once:
-
+  pinMode(3, INPUT);
+  pinMode(5, INPUT);
+  pinMode(2, OUTPUT);
 }
 
-void loop() 
+void loop()
 {
-  // put your main code here, to run repeatedly:
-
+  if(digitalRead(3,HIGH) || digitalRead(5,HIGH))
+  {
+    digitalWrite(2, HIGH);
+  }
+  else
+    digitalWrite(2, LOW);
 }
