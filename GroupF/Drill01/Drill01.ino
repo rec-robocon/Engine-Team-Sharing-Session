@@ -1,11 +1,18 @@
-void setup() 
+const int button1=3;
+const int button2=4;
+const int ledPin=5;
+void setup()
 {
-  // put your setup code here, to run once:
+  pinMode(button1,INPUT);
+  pinMode(button2,INPUT);
+  pinMode(ledpin,OUTPUT);
 
 }
 
-void loop() 
+void loop()
 {
-  // put your main code here, to run repeatedly:
+  digitalWrite(ledPin,digitalRead(button1));
+  digitalWrite(ledPin,digitalRead(button2));
+
 
 }
