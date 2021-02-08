@@ -8,6 +8,7 @@ void setup()
 Serial.begin(9600);
 pinMode(BUTTON1, INPUT);
 pinMode(BUTTON2, INPUT);
+//testing
 pinMode(LED, OUTPUT);
 
 }
