@@ -1,11 +1,34 @@
-void setup() 
-{
-  // put your setup code here, to run once:
+int btn=11;
+int led=12;
+int counter=0;
+
+void setup()
+{ Serial.begin(9600);
+  pinMode(btn,INPUT);
+  pinMode(led,OUTPUT);
 
 }
 
-void loop() 
+
+void ledlight(int n)
 {
-  // put your main code here, to run repeatedly:
+  if(n%7==0||n%10==7)
+  {
+    digitalWirte(led,1);
+  }
+  else{
+    digitalWrite(led,0);
+  }
+
+}
+
+void loop()
+{
+  if(digitalRead(btn)==1)
+  {
+  counter ++;
+  serial.print(counter);
+  }
+  ledlight(counter);
 
 }
