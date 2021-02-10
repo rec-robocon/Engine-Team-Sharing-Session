@@ -28,7 +28,8 @@ void loop()
   {
   counter ++;
   serial.print(counter);
-  }
   ledlight(counter);
+  }
+
 
 }
