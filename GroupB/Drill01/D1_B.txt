@@ -1,0 +1,4 @@
+- Define your pins with names
+- Adjust your indentation 
+- Line 16 there's a missing ")"
+- It's a functional code, just need to take note of some programming habits, good job

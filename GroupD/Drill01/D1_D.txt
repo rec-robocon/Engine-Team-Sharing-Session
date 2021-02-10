@@ -1,0 +1,3 @@
+- digitalRead() takes only one argument
+- didn't take into account for both buttons are pressed, where LED should be off
+- the concept is correct, good. 
