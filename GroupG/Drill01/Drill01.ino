@@ -1,6 +1,6 @@
-const LEDpin = 13;
-const button1 = 2;
-const button2 = 3;
+const int LEDpin = 13;
+const int button1 = 2;
+const int button2 = 3;
 
 void setup()
 {
