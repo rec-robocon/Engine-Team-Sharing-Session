@@ -74,7 +74,7 @@ void TimedAction::setInterval( unsigned long intervl){
 ///////////////////////////////////////////////////////////////////////
 //variables
 const int button=2,led=3;
-int counter=0;
+int counter=0, ledstate=0;
 unsigned long currentmillis=millis(), previousmillis_1=0,previousmillis_2=0;
 
 
@@ -120,4 +120,4 @@ void Countervalue(int c)
       previousmilli_2=currentmillis;
       Serial.print(c);
   }
-}
+} 
