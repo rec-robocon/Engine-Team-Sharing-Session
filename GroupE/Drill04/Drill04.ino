@@ -90,7 +90,7 @@ void check_button()
 {
   if (digitalRead(btn) == HIGH)
   counter++;
-  delay(1000);
+
 }
 
 TimedAction Counter=TimedAction(2000,PrintingCounter);
