@@ -7,24 +7,24 @@
 #define NO_PREDELAY 0
 
 class TimedAction {
-  
+
   public:
     TimedAction(unsigned long interval,void (*function)());
     TimedAction(unsigned long prev,unsigned long interval,void (*function)());
-  
+
   void reset();
   void disable();
   void enable();
   void check();
-  
+
   void setInterval( unsigned long interval );
 
-  private: 
+  private:
     bool active;
     unsigned long previous;
     unsigned long interval;
     void (*execute)();
-    
+
 };
 
 #endif
@@ -71,14 +71,39 @@ void TimedAction::setInterval( unsigned long intervl){
   interval = intervl;
 }
 
-void setup() 
+int b1 = 12;
+int Led = 13;
+void setup()
 {
   // put your setup code here, to run once:
+  pinMode(b1, INPUT);
+  pinMode(Led, OUTPUT);
+  Serial.begin(9600);
 
 }
 
-void loop() 
+void loop()
 {
-  // put your main code here, to run repeatedly:
+  int ledstate = LOW;
+  int counter = 0;
+    for(int i = 0; digitalRead(b1, HIGH); i++)
+    {
 
+      if( (millis()-previous)==2000)
+      {
+        Serial.print(counter);
+      }
+
+      if( (millis()-previous)==1000)
+      {
+        if(ledstate == LOW)
+        {
+          ledstate == HIGH;
+          counter++;
+        }
+        else
+          ledstate == LOW;
+      }
+    }
+  }
 }
