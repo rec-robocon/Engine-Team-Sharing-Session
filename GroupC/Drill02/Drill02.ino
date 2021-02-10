@@ -1,7 +1,9 @@
-const int buttonpin=2, Led=3 ,d=7;
+const int buttonpin=2, Led=3;
 int Pushbuttoncounter=0;
-bool buttonpress;
-string string(x);
+int currentmillis= millis();
+int previousmillis= 0, timer=0;
+
+void condition(int);
 
 void setup()
 {
@@ -11,35 +13,39 @@ void setup()
 
 void loop()
 {
-  button= digitalRead(buttonpin);
-  if (button == LOW)
+  int button= digitalRead(buttonpin);
+  timer = currentmillis - previousmillis;
+  while (timer<=30000) //take in input for 30s
   {
-    buttonpress = true;
-    Pushbuttoncounter++;
+    if (button == HIGH)
+      Pushbuttoncounter++;
+    timer = currentmillis - previousmillis;
   }
+
   condition(Pushbuttoncounter);
+  Pushbuttoncounter=0;
+  previousmillis=currentmillis;
 }
 
-void condition(int Pushbuttoncounter)
+void condition(int counter)
 {
-  if(Pushbuttoncounter%d==0)
-  {
+  if(counter%7==0) //first condition
     digitalwrite(led,HIGH);
-    serialPrintln(Pushbuttoncounter);
-  }
-  else if (Pushbuttoncounter > 0)
+
+  else if (counter%7!=0) //second condition
   {
-    while (Pushbuttoncounter > 0)
+    while (counter > 0)
     {
-      if (Pushbuttoncounter % 10 == d)
+      int lastnumber= counter% 10; //read last number
+      if (lastnumber == 7)
       {
         digitalWrite(Led, HIGH);
-        break;
+        break; //jump out from while loop
       }
-      Pushbuttoncounter = Pushbuttoncounter / 10;
-      else // doesnt meet both condution
-     {
-        digitalWrite(Led,LOW);
-     }
+      else
+        counter = lastnumber/ 10; //if last number not 7, move on to second last digit
+    }
   }
-}
+    else // doesnt meet both condution
+      digitalWrite(Led, LOW);
+} 
