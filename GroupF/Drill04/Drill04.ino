@@ -7,24 +7,24 @@
 #define NO_PREDELAY 0
 
 class TimedAction {
-  
+
   public:
     TimedAction(unsigned long interval,void (*function)());
     TimedAction(unsigned long prev,unsigned long interval,void (*function)());
-  
+
   void reset();
   void disable();
   void enable();
   void check();
-  
+
   void setInterval( unsigned long interval );
 
-  private: 
+  private:
     bool active;
     unsigned long previous;
     unsigned long interval;
     void (*execute)();
-    
+
 };
 
 #endif
@@ -71,14 +71,38 @@ void TimedAction::setInterval( unsigned long intervl){
   interval = intervl;
 }
 
-void setup() 
-{
-  // put your setup code here, to run once:
+const int buttonpin=5;
+const int ledpin=10;
+unsigned long prev=0;
+int ledState=LOW;
+int buttonState=LOW;
+int counter = 0;
 
+void blink(){
+  ledState ? ledState=false : ledState=true;
+  digitalWrite(ledpin,ledState);
 }
 
-void loop() 
-{
-  // put your main code here, to run repeatedly:
+void print(int counter){
+    Serial.println(counter);
+}
 
+TimedAction timedAction = TimedAction(1000,blink);
+TimedAction timedAction2 = TimedAction(2000,print);
+
+void setup()
+{
+  pinMode(buttonpin,INPUT);
+  pinMode(ledpin,OUTPUT);
+}
+
+void loop()
+{
+  buttonstate=digitalRead(buttonpin);
+  if(buttonstate = digitalRead(buttonpin){
+    counter++;
+  }
+    timedAction.check();
+    timedAction2.check();
+  }
 }
