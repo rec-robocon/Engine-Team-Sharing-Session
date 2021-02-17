@@ -19,7 +19,7 @@ void loop()
     Serial.print("Your angpau: ");
     Serial.println(x);
     total += x.toInt();
-    Serial.print("Total amount of your angpau: ")
+    Serial.print("Total amount of your angpau: ");
     Serial.println(total);
   }
   //Serial.println(Serial.read());
