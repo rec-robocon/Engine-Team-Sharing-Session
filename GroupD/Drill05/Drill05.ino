@@ -1,22 +1,27 @@
+int total = 0;
 void setup()
 {
-pinMode(4, OUTPUT);
-pinMode(2, INPUT);
-pinMode(3, INPUT);
+  Serial.begin(9600);
 }
 
 void loop()
 {
-if (digitalRead(2) == 1)
+  String x = " ";
+  while(Serial.available()>0)
   {
-    if (digitalRead(3) == 0)
-      digitalWrite(4) = 1;
-    else
-      digitalWrite(4) =0;
+    char incomingbyte = Serial.read();
+    x += incomingbyte;
+    delay(100);
   }
-else
+
+  if (x != " ")
   {
-    if (digitalRead(3) ==1)
-      digitalWrite(4) =1;
+    Serial.print("Your angpau: ");
+    Serial.println(x);
+    total += x.toInt();
+    Serial.print("Total amount of your angpau: ");
+    Serial.println(total);
   }
+  //Serial.println(Serial.read());
+
 }
