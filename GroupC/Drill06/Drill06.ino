@@ -71,59 +71,37 @@ void TimedAction::setInterval( unsigned long intervl){
   interval = intervl;
 }
 
-//Declare Variable
-bool is_pressed = false;
-int counted, counter = 0, ledState = LOW;
 
-//Declare blink function
-void blink()
+//Start here
+#include <TimedAction.h>
+
+char y[8]= {};
+String input;
+int str_len;
+int x=str_len-1;
+void serialPrint(char y[8],int str_len)
 {
-  if (ledState == LOW)
-    ledState = HIGH;
-  else
-    ledState = LOW;
+  for(int i=0;i<str_len;i++)//i think 8 chg to x
+  {
+    Serial.println(char(y[i])); //array need forloop
+  }
+  y[x]=" ";//we cut one by one bushi,
+  x--;
 
-  digitalWrite(4, ledState);
 }
 
-//Declare print function
-void serialPrint()
-{
-  Serial.println(counter);
-}
-
-//Construct object
-TimedAction action1 = TimedAction(1000, blink);
-TimedAction action2 = TimedAction(2000, serialPrint);
+TimedAction action2 = TimedAction(1000, serialPrint);
 
 void setup()
 {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-  pinMode(3, INPUT);
-  pinMode(4, OUTPUT);
 }
 
 void loop()
 {
-  action1.check();
+  if(Serial.available()>0)
+    input=char(Serial.read());
+  str_len = input.length() + 1;
+  input.toCharArray(y,str_len);
   action2.check();
-
-  if (digitalRead(3) == 1)
-  {
-    is_pressed = true;
-    counted = 1;
-  }
-  while (is_pressed == true)
-  {
-    if (counted == 1)
-    {
-      counter++;
-      counted = 0;
-    }
-    if (digitalRead(3) == 0)
-    {
-      is_pressed = false;
-    }
-  }
 }
