@@ -1,36 +1,36 @@
+#include <Wire.h>
+
+int num[100] = {};
+int counter = 0;
+int count_1 = 0;
+
 void setup()
 {
-  // put your setup code here, to run once:
-  pinMode(A0, INPUT);
-  pinMode(4, OUTPUT);
+  Wire.begin(4);                // join i2c bus with address #4
+  Wire.onReceive(receiveEvent); // register event
+  Serial.begin(9600);           // start serial for output
 }
 
 void loop()
 {
-  bool is_pressed = false, has_seven = false;
-  int counter = 0;
-  String x;
-  while (is_pressed == false)// put your main code here, to run repeatedly:
+  delay(100);
+}
+
+// function that executes whenever data is received from master
+// this function is registered as an event, see setup()
+void receiveEvent(int howMany)
+{
+  while(0 < Wire.available()) // loop through all but the last
   {
-    if (analogRead(A0) == 1)
+    num[counter] = Wire.read(); // receive byte
+    counter++;
+  }
+  if(counter == 100)
+  {
+    while(count_1 < 100)
     {
-      is_pressed =  true;
-      counter++;
+      Serial.println(num[count_1] + 100);
+      count_1++;
     }
   }
-
-  x = String(counter);
-
-  for(int i = 0; x[i] != '7'; i++)
-  {
-    if (x[i] == '7')
-      digitalWrite(4, HIGH);
-  }
-
-
-  if (counter%7 == 0)
-  {
-    digitalWrite(4, HIGH);
-  }
-
 }
