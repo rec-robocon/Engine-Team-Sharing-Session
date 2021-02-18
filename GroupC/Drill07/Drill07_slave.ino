@@ -13,14 +13,10 @@ void setup()
 
 void loop()
 {
-  if(arr[99]==100)
-  {
-    for(int i=0; i<100; i++)
-    {
-      Serial.println( arr[i] + 100 );
+
       delay(100);
-    }
-  }
+
+
 }
 
 void receiveEvent(int howMany)
@@ -30,5 +26,12 @@ void receiveEvent(int howMany)
     arr[count]= int(Wire.read());
     Serial.println(arr[count]);
     count++;
+  }
+  if(arr[99]==100)
+  {
+    for(int i=0; i<100; i++)
+    {
+      Serial.println( arr[i] + 100 );
+    }
   }
 }
