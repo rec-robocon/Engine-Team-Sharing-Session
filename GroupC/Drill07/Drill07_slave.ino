@@ -1,36 +1,34 @@
+//slave
+#include <Wire.h>
+
+int arr[100];
+int count=0;
+
 void setup()
 {
-  // put your setup code here, to run once:
-  pinMode(A0, INPUT);
-  pinMode(4, OUTPUT);
+  Wire.begin(4);
+  Wire.onReceive(receiveEvent);
+  Serial.begin(9600);
 }
 
 void loop()
 {
-  bool is_pressed = false, has_seven = false;
-  int counter = 0;
-  String x;
-  while (is_pressed == false)// put your main code here, to run repeatedly:
+  if(arr[99]==100)
   {
-    if (analogRead(A0) == 1)
+    for(int i=0; i<100; i++)
     {
-      is_pressed =  true;
-      counter++;
+      Serial.println( arr[i] + 100 );
+      delay(100);
     }
   }
+}
 
-  x = String(counter);
-
-  for(int i = 0; x[i] != '7'; i++)
+void receiveEvent(int howMany)
+{
+  while(Wire.available())
   {
-    if (x[i] == '7')
-      digitalWrite(4, HIGH);
+    arr[count]= int(Wire.read());
+    Serial.println(arr[count]);
+    count++;
   }
-
-
-  if (counter%7 == 0)
-  {
-    digitalWrite(4, HIGH);
-  }
-
 }
