@@ -13,6 +13,7 @@ void loop()
     {
       Wire.beginTransmission(4);
       Wire.write(x);
+      Serial.println(x);
       delay(100);
       Wire.endTransmission();
     }

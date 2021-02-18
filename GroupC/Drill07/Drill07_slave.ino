@@ -24,7 +24,6 @@ void receiveEvent(int howMany)
   while(Wire.available())
   {
     arr[count]= int(Wire.read());
-    Serial.println(arr[count]);
     count++;
   }
   if(arr[99]==100)
