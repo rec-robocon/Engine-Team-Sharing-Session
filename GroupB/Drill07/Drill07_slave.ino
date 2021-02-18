@@ -1,36 +1,34 @@
+//Slave
+#include <Wire.h>
+int arry[100] = {}, i = 0;
+
 void setup()
 {
-  // put your setup code here, to run once:
-  pinMode(A0, INPUT);
-  pinMode(4, OUTPUT);
+  Wire.begin(4);                // join i2c bus with address #4
+  Wire.onReceive(receiveEvent); // register event
+  Serial.begin(9600);           // start serial for output
 }
 
 void loop()
 {
-  bool is_pressed = false, has_seven = false;
-  int counter = 0;
-  String x;
-  while (is_pressed == false)// put your main code here, to run repeatedly:
+  delay(100);
+}
+
+
+void receiveEvent(int howMany)
+{
+  while(Wire.available())
   {
-    if (analogRead(A0) == 1)
-    {
-      is_pressed =  true;
-      counter++;
-    }
+    arry[i] = Wire.read();
+    i++;
   }
 
-  x = String(counter);
-
-  for(int i = 0; x[i] != '7'; i++)
+  if(arry[99] == 100)
   {
-    if (x[i] == '7')
-      digitalWrite(4, HIGH);
+  		for (int a = 0; a < 100; a++)
+    	{
+      		Serial.println(arry[a] + 100);
+         	delay(500);
+    	}
   }
-
-
-  if (counter%7 == 0)
-  {
-    digitalWrite(4, HIGH);
-  }
-
 }

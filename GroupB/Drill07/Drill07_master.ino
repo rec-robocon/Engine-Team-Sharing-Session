@@ -1,36 +1,21 @@
+//Master
+#include <Wire.h>
+
 void setup()
 {
-  // put your setup code here, to run once:
-  pinMode(A0, INPUT);
-  pinMode(4, OUTPUT);
+  Wire.begin(); // join i2c bus (address optional for master)
 }
+
+byte x = 1;
 
 void loop()
 {
-  bool is_pressed = false, has_seven = false;
-  int counter = 0;
-  String x;
-  while (is_pressed == false)// put your main code here, to run repeatedly:
-  {
-    if (analogRead(A0) == 1)
-    {
-      is_pressed =  true;
-      counter++;
-    }
-  }
 
-  x = String(counter);
-
-  for(int i = 0; x[i] != '7'; i++)
-  {
-    if (x[i] == '7')
-      digitalWrite(4, HIGH);
-  }
-
-
-  if (counter%7 == 0)
-  {
-    digitalWrite(4, HIGH);
+  for(int i = 0;i < 100; i++ ){
+    Wire.beginTransmission(4);
+    Wire.write(x);              // sends one byte
+    x++;
+    Wire.endTransmission();    // stop transmitting
   }
 
 }
